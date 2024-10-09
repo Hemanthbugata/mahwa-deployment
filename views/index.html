@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manhwa List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Popular Manhwa Today</h1>
+    <div id="manhwa-list" class="manhwa-list">
+        <!-- Manhwa cards will be dynamically inserted here -->
+    </div>
+
+    <script>
+        // Fetch manhwa data from the /manhwa route
+        fetch('/manhwa')
+            .then(response => response.json())
+            .then(data => {
+                const manhwaList = document.getElementById('manhwa-list');
+                manhwaList.innerHTML = ''; // Clear any previous content
+
+                data.forEach(manhwa => {
+                    const card = document.createElement('div');
+                    card.classList.add('manhwa-card');
+
+                    card.innerHTML = `
+                        <img src="${manhwa.image_url}" alt="${manhwa.title} Cover" class="manhwa-image">
+                        <h2>${manhwa.title}</h2>
+                        <p><strong>Genre:</strong> ${manhwa.genre}</p>
+                        <p>${manhwa.description}</p>
+                    `;
+                    manhwaList.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error loading manhwa data:', error));
+    </script>
+</body>
+</html>
+

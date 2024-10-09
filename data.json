@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Absolute Regression",
+    "genre": "Fantasy, Action",
+    "description": "After regressing to his younger self, a hero seeks to change his tragic fate...",
+    "image_url": "https://manhwa-cover-images.s3.amazonaws.com/1+anime.webp"
+  },
+  {
+    "title": "Chronicles of the Demon Faction",
+    "genre": "Action, Martial Arts, Fantasy",
+    "description": "The last heir of the Demon Faction awakens...",
+    "image_url": "https://manhwa-cover-images.s3.amazonaws.com/2+anime.webp"
+  },
+  {
+    "title": "Regressor of the Fallen Family",
+    "genre": "Fantasy, Drama",
+    "description": "After a life of regret, he regresses to restore his family's fallen glory...",
+    "image_url": "https://manhwa-cover-images.s3.amazonaws.com/3+anime.webp"
+  },
+  {
+    "title": "Necromancer's Evolutionary Traits",
+    "genre": "Fantasy, Adventure, Magic",
+    "description": "A man blessed with necromancy starts at the bottom, raising weak undead...",
+    "image_url": "https://manhwa-cover-images.s3.amazonaws.com/4+anime.webp"
+  },
+  {
+    "title": "Wandering Warrior of Wudang",
+    "genre": "Martial Arts, Fantasy, Action",
+    "description": "A master of martial arts from Wudang embarks on a journey of justice...",
+    "image_url": "https://manhwa-cover-images.s3.amazonaws.com/5+anime.webp"
+  }
+]
+
