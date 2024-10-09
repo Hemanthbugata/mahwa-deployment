@@ -40,44 +40,51 @@ Before starting, make sure you have the following:
 2. Installing Dependencies on EC2
 Update your instance:
 
-bash
-Copy code
+```
 sudo yum update -y
+```
+
 Install Node.js:
 
-...
+```
 curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
 sudo yum install -y nodejs
-...
+```
 Install MySQL client (for connecting to the RDS instance):
 
-...
+```
 sudo yum install mysql -y
-...
+```
 Clone your application code or create your project directory:
 
-...
+```
 mkdir manhwa-webapp
 cd manhwa-webapp
-...
+```
 
 3. Setting Up RDS (MySQL)
-Go to the RDS dashboard on AWS.
-Click Create Database and select MySQL.
-Choose Free tier settings with db.t2.micro.
-Set the Master username and password.
-Enable Public accessibility and set the security group to allow access from your EC2 instance's IP.
-Once the RDS instance is available, note the Endpoint.
-4. Connecting to the MySQL Database
+   
+    
+1. Go to the RDS dashboard on AWS.
+2. Click **Create Database** and select MySQL.
+3. Choose Free tier settings with `db.t2.micro`.
+4. Set the Master username and password.
+5. Enable Public accessibility and set the security group to allow access from your EC2 instance's IP.
+6. Once the RDS instance is available, note the Endpoint.     
+5. Connecting to the MySQL Database
+
+
 SSH into your EC2 instance and connect to the RDS instance:
 
-...
+```
 mysql -h your-rds-endpoint -u admin -p
-...
+```
+
 Create a database and table:
 
 sql
-...
+
+```
 CREATE DATABASE manhwaDB;
 USE manhwaDB;
 
@@ -89,14 +96,17 @@ CREATE TABLE manhwa (
   image_url VARCHAR(255)
 );
 
+```
+
 Insert some sample data:
 
+```
 sql
 INSERT INTO manhwa (title, genre, description, image_url)
 VALUES 
 ('Absolute Regression', 'Manhwa', 'After regressing, a hero tries to change his fate.', 'https://manhwa-cover-images.s3.amazonaws.com/1+anime.webp'),
 ('Chronicles of the Demon Faction', 'Manhwa', 'A gripping tale of conflict and revenge.', 'https://manhwa-cover-images.s3.amazonaws.com/2+anime.webp');
-...
+```
 
 5. Hosting Images on S3
 Go to S3 in the AWS console and create a new bucket (e.g., manhwa-cover-images).
@@ -104,10 +114,10 @@ Go to S3 in the AWS console and create a new bucket (e.g., manhwa-cover-images).
 Upload your manhwa cover images into the bucket.
 
 Configure the bucket policy to allow public access to the images:
-...
+
+```
 
 json
-Copy code
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -121,31 +131,30 @@ Copy code
   ]
 }
 
-...
+```
 
 Get the S3 URLs for the images and store them in the MySQL database.
 
 6. Deploying the Node.js Application
 Initialize the project in your manhwa-webapp directory:
-...
+
+```
 npm init -y
 Install necessary packages:
 
 
 npm install express mysql
-...
+```
 
-...
+```
 Create the app.js file:
 
-javascript
-Copy code
+
 const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
 
-// Database connection configuration
 const db = mysql.createConnection({
   host: 'your-rds-endpoint', // RDS endpoint
   user: 'admin',
@@ -182,12 +191,12 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-...
+
 
 Start the Node.js server:
-...
+
 node app.js
-...
+```
 
 Access the application at http://<your-ec2-public-ip>:3000/manhwa to see the list of manhwa with their cover images from S3 and data from the MySQL RDS instance.
 
